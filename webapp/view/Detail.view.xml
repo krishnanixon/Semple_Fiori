@@ -15,6 +15,23 @@
 		upperCaseAnchorBar="false">
         <headerTitle>
 			<ObjectPageDynamicHeaderTitle>
+			<expandedHeading>
+					<m:Title text="{products>Name}" wrapping="true" class="sapUiSmallMarginEnd"/>
+				</expandedHeading>
+
+				<snappedHeading>
+					<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Center">
+						<m:FlexBox wrap="NoWrap" fitContainer="true" alignItems="Center" class="sapUiTinyMarginEnd">
+							<f:Avatar
+								src="https://ui5.sap.com/{products>ProductPicUrl}"
+								displaySize="S"
+								displayShape="Square"
+								class="sapUiTinyMarginEnd"/>
+							<m:Title text="{products>Name}" wrapping="true"/>
+						</m:FlexBox>
+					</m:FlexBox>
+				</snappedHeading>
+
 				<actions>
 					<m:ToggleButton
 						text="Edit"
@@ -36,18 +53,22 @@
 		<headerContent>
 			<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
 				<f:Avatar
+					src="https://ui5.sap.com/{products>ProductPicUrl}"
 					displaySize="L"
 					displayShape="Square"
 					class="sapUiTinyMarginEnd">
 				</f:Avatar>
 				<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
 					<m:Label text="Main Category"/>
+					<m:Text text="{products>MainCategory}"/>
 				</m:VBox>
 				<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
 					<m:Label text="Subcategory"/>
+					<m:Text text="{products>Category}"/>
 				</m:VBox>
 				<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
 					<m:Label text="Price"/>
+					<m:ObjectNumber number="{products>CurrencyCode} {products>Price}" emphasized="false"/>
 				</m:VBox>
 			</m:FlexBox>
 		</headerContent>
@@ -66,10 +87,13 @@
 								emptySpanM="0"
 								columnsL="1"
 								columnsM="1">
-								<form:content>
+									<form:content>
 									<m:Label text="Product ID"/>
+									<m:Text text="{products>ProductId}"/>
 									<m:Label text="Description"/>
+									<m:Text text="{products>Description}"/>
 									<m:Label text="Supplier"/>
+									<m:Text text="{products>SupplierName}"/>
 								</form:content>
 							</form:SimpleForm>
 						</blocks>
@@ -88,7 +112,7 @@
 									<m:Column/>
 								</m:columns>
 								<m:items>
-									<m:ColumnListItem type="Navigation">
+									<m:ColumnListItem type="Navigation" press=".onSupplierPress">
 										<m:cells>
 											<m:ObjectIdentifier text="{products>text}"/>
 										</m:cells>
