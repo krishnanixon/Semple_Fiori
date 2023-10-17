@@ -102,6 +102,12 @@
           "layout": "EndColumnFullScreen"
         },
         {
+          "pattern": "create",
+          "name": "create",
+          "target": "create",
+          "layout": "EndColumnFullScreen"
+        },
+        {
           "pattern": ":layout:",
           "name": "list",
           "target": [
@@ -142,6 +148,10 @@
         },
         "page2": {
           "name": "AboutPage",
+          "controlAggregation": "endColumnPages"
+        },
+        "create": {
+          "name": "Create",
           "controlAggregation": "endColumnPages"
         }
       }

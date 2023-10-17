@@ -30,7 +30,7 @@ sap.ui.define([
         },
 
         onAdd: function () {
-            MessageBox.information("This functionality is not ready yet.", { title: "Aw, Snap!" });
+            this.oRouter.navTo("page2", { layout: fioriLibrary.LayoutType.EndColumnFullScreen });
         },
 
         onSort: function () {
