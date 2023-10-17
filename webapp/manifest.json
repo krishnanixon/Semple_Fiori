@@ -85,38 +85,49 @@
     },
     "routing": {
       "config": {
-        "routerClass": "sap.m.routing.Router",
+        "routerClass": "sap.f.routing.Router",
+        "type": "View",
         "viewType": "XML",
-        "async": true,
-        "viewPath": "project1.view",
-        "controlAggregation": "pages",
-        "controlId": "app",
-        "clearControlAggregation": false
+        "path": "project1.view",
+        "controlId": "flexibleColumnLayout",
+        "transition": "slide",
+        "bypassed": {},
+        "async": true
       },
       "routes": [
         {
-          "name": "RouteView1",
-          "pattern": ":?query:",
+          "pattern": ":layout:",
+          "name": "list",
           "target": [
-            "TargetView1"
+            "list",
+            "detail"
+          ]
+        },
+        {
+          "pattern": "detail/{product}/{layout}",
+          "name": "detail",
+          "target": [
+            "list",
+            "detail"
           ]
         }
       ],
       "targets": {
-        "TargetView1": {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": false,
-          "viewId": "View1",
-          "viewName": "View1"
+        "list": {
+          "name": "List",
+          "controlAggregation": "beginColumnPages"
+        },
+        "detail": {
+          "name": "Detail",
+          "controlAggregation": "midColumnPages"
         }
       }
     },
     "rootView": {
-      "viewName": "project1.view.App",
+      "viewName": "project1.view.View1",
       "type": "XML",
       "async": true,
-      "id": "App"
+      "id": "flexibleColumnLayout"
     }
   }
 }
