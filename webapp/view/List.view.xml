@@ -8,7 +8,7 @@
 		<f:title>
 			<f:DynamicPageTitle>
 				<f:heading>
-					<Title text="Products ({products>/ProductCollectionStats/Counts/Total})"/>
+					<Title text="Items"/>
 				</f:heading>
 			</f:DynamicPageTitle>
 		</f:title>
@@ -26,7 +26,7 @@
 					id="productsTable"
 					inset="false"
 					items="{
-						path: 'products>/ProductCollection',
+						path: 'products>/value',
 						sorter: {
 							path: 'Name'
 						}
@@ -44,17 +44,17 @@
 					<items>
 						<ColumnListItem type="Navigation" press=".onListItemPress">
 							<cells>
-								<ObjectIdentifier title="{products>Name}" text="{products>ProductId}"/>
+								<ObjectIdentifier title="{products>ItemName}" text="{products>ItemCode}"/>
 								<ObjectNumber
 									number="{
 										parts:[
-											{path:'products>Price'},
-											{path:'products>CurrencyCode'}
+											{path:'products>ItemPrices/0/Price'},
+											{path:'products>ItemPrices/0/Currency'}
 										],
 										type: 'sap.ui.model.type.Currency',
 										formatOptions: {showMeasure: false}
 									}"
-									unit="{products>CurrencyCode}"/>
+									unit="{products>ItemPrices/0/Currency}"/>
 							</cells>
 						</ColumnListItem>
 					</items>

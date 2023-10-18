@@ -7,14 +7,40 @@ sap.ui.define([
 
         return Controller.extend("project1.controller.View1", {
             onInit: function () {
+                var oProductsModel = new JSONModel();
+                var apiUrl = "http://44.193.177.66:50001/b1s/v1/Items";
+                var username = `{"UserName": "manager", "CompanyDB": "AC_Demo"}`;
+                var password = "Nixon@123";
 
-                // Extra ******
-                var oProductsModel;
-                oProductsModel = new JSONModel(sap.ui.require.toUrl("project1/mockdata/products.json"));
-                oProductsModel.setSizeLimit(1000);
-                this.getView().setModel(oProductsModel, 'products');
-                // *******//** */
+                // Encode credentials in base64
+                var credentials = btoa(username + ":" + password);
 
+                fetch(apiUrl, {
+                    method: "GET",
+                    headers: {
+                        "Authorization": "Basic " + credentials,
+                        "Content-Type": "application/json"
+                    }
+                })
+                    .then(function (response) {
+                        if (!response.ok) {
+                            throw new Error("Network response was not ok");
+                        }
+                        return response.json();
+                    })
+                    .then(function (data) {
+                        // Set the retrieved data to the JSONModel
+                        oProductsModel.setData(data);
+
+                        // Set the JSONModel to the "products" model of the view
+                        this.getView().setModel(oProductsModel, "products");
+                    }.bind(this)) // Bind the "this" context to access the view
+
+                    .catch(function (error) {
+                        console.error("Error:", error);
+                    });
+
+                // The rest of your initialization code
                 this.oOwnerComponent = this.getOwnerComponent();
                 this.oRouter = this.oOwnerComponent.getRouter();
                 this.oRouter.attachRouteMatched(this.onRouteMatched, this);

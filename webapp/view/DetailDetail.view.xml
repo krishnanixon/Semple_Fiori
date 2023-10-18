@@ -1,20 +1,44 @@
 <mvc:View
 	controllerName="project1.controller.DetailDetail"
-	xmlns="sap.f"
-	xmlns:m="sap.m"
-	xmlns:mvc="sap.ui.core.mvc">
-	<DynamicPage toggleHeaderOnTitleClick="false">
-		<title>
-			<DynamicPageTitle>
-				<heading>
-					<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Center">
-						<m:Title text="{products>text}" wrapping="true" class="sapUiTinyMarginEnd"/>
-					</m:FlexBox>
-				</heading>
-			</DynamicPageTitle>
-		</title>
+		xmlns:l="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:main="sap.ui.webc.main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Panel width="100%" height="100%"  accessibleRole="Region">
+        <headerToolbar>
+            <OverflowToolbar>
+                <Title text="Edit Item"/>
+            </OverflowToolbar>
+        </headerToolbar>
         <content>
-			<m:Link text="Navigate to next page…" press=".handleAboutPress"/>
-		</content>
-	</DynamicPage>
+            <FlexBox height="100%" alignItems="Center" justifyContent="Center">
+                <l:VerticalLayout class="sapUiContentPadding">
+                    <Label text="Product Name"/>
+                    <Input value="{addItem>/productName}" valueLiveUpdate="true" width="250px"/>
+                    
+                    <Label text="Product ID"/>
+                    <Input value="{addItem>/productID}" valueLiveUpdate="true" width="250px"/>
+
+                    <Label text="Price"/>
+                    <Input value="{addItem>/price}" valueLiveUpdate="true" width="250px"/>
+
+                    <Label text="Supplier"/>
+                    <Input value="{addItem>/supplier}" valueLiveUpdate="true" width="250px"/>
+
+                    <Label text="Description"/>
+                    <Input value="{addItem>/description}" valueLiveUpdate="true" width="250px"/>
+
+                    <FlexBox alignItems="End" justifyContent="End">
+                        <l:HorizontalLayout class="sapUiContentPadding" width="100%">
+                            <l:content>
+                                <Button text="Cancel" press="onCancel" type="Emphasized"></Button>
+                                <Button text="Save" press="onSubmit" type="Emphasized"></Button>
+                            </l:content>
+                        </l:HorizontalLayout>
+                    </FlexBox>
+                </l:VerticalLayout>
+            </FlexBox>
+        </content>
+    </Panel>
 </mvc:View>

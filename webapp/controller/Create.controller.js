@@ -1,16 +1,16 @@
 sap.ui.define(
     [
+        "sap/ui/model/json/JSONModel",
         "sap/ui/core/mvc/Controller"
     ],
-    function (BaseController) {
+    function (Controller, JSONModel) {
         "use strict";
 
-        return BaseController.extend("project1.controller.Create", {
+        return Controller.extend("project1.controller.Create", {
 
             onInit: function () {
 
-                // create the views based on the url/hash
-                this.getRouter().initialize();
+
             }
         });
     }
