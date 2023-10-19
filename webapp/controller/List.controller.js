@@ -30,7 +30,7 @@ sap.ui.define([
         },
 
         onAdd: function (oEvent) {
-            this.oRouter.navTo("page2", { layout: fioriLibrary.LayoutType.EndColumnFullScreen });
+            this.oRouter.navTo("add", { layout: fioriLibrary.LayoutType.EndColumnFullScreen });
         },
 
         onSort: function () {

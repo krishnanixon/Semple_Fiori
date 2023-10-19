@@ -96,15 +96,15 @@
       },
       "routes": [
         {
-          "pattern": "page2",
-          "name": "page2",
-          "target": "page2",
+          "pattern": "add",
+          "name": "add",
+          "target": "add",
           "layout": "EndColumnFullScreen"
         },
         {
-          "pattern": "create",
-          "name": "create",
-          "target": "create",
+          "pattern": "edit/{id}",
+          "name": "edit",
+          "target": "edit",
           "layout": "EndColumnFullScreen"
         },
         {
@@ -146,11 +146,11 @@
           "name": "DetailDetail",
           "controlAggregation": "endColumnPages"
         },
-        "page2": {
+        "add": {
           "name": "AboutPage",
           "controlAggregation": "endColumnPages"
         },
-        "create": {
+        "edit": {
           "name": "Create",
           "controlAggregation": "endColumnPages"
         }

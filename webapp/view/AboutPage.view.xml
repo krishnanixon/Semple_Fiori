@@ -5,7 +5,7 @@
     xmlns:main="sap.ui.webc.main"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
-    <Panel width="auto" height="100%" class="sapUiResponsiveMargin" accessibleRole="Region">
+    <Panel width="auto" height="100%" accessibleRole="Region">
         <headerToolbar>
             <OverflowToolbar>
                 <Title text="Add Item"/>

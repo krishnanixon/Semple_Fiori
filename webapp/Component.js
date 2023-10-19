@@ -12,12 +12,15 @@ sap.ui.define([
         },
 
         init: function () {
-            var oModel, oRouter;
+            var oModel, oRouter, editObj;
 
             UIComponent.prototype.init.apply(this, arguments);
 
             oModel = new JSONModel();
             this.setModel(oModel);
+
+            editObj = new JSONModel()
+            this.setModel(editObj, "ItemDetails")
 
             oRouter = this.getRouter();
             oRouter.attachBeforeRouteMatched(this._onBeforeRouteMatched, this);

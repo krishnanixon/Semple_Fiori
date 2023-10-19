@@ -1,8 +1,9 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    'sap/ui/model/json/JSONModel'
+    'sap/ui/model/json/JSONModel',
+    'sap/m/MessageToast'
 ],
-    function (Controller, JSONModel) {
+    function (Controller, JSONModel, MessageToast) {
         "use strict";
 
         return Controller.extend("project1.controller.View1", {
@@ -14,7 +15,7 @@ sap.ui.define([
 
                 // Encode credentials in base64
                 var credentials = btoa(username + ":" + password);
-
+                sap.ui.core.BusyIndicator.show()
                 fetch(apiUrl, {
                     method: "GET",
                     headers: {
@@ -34,9 +35,12 @@ sap.ui.define([
 
                         // Set the JSONModel to the "products" model of the view
                         this.getView().setModel(oProductsModel, "products");
+                        sap.ui.core.BusyIndicator.hide()
                     }.bind(this)) // Bind the "this" context to access the view
 
                     .catch(function (error) {
+                        sap.ui.core.BusyIndicator.hide()
+                        MessageToast.show(error);
                         console.error("Error:", error);
                     });
 

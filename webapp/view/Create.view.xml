@@ -1,38 +1,39 @@
 <mvc:View
+controllerName="project1.controller.Create"
     xmlns:l="sap.ui.layout"
     xmlns:form="sap.ui.layout.form"
     xmlns:main="sap.ui.webc.main"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
-    <Panel width="auto" height="100%" class="sapUiResponsiveMargin" accessibleRole="Region">
+    <Panel width="auto" height="100%" id="c1" class="sapUiResponsiveMargin" accessibleRole="Region">
         <headerToolbar>
-            <OverflowToolbar>
-                <Title text="Edit Item"/>
+            <OverflowToolbar id="c2">
+                <Title id="c3" text="I am Here"/>
             </OverflowToolbar>
         </headerToolbar>
         <content>
-            <FlexBox height="100%" alignItems="Center" justifyContent="Center">
-                <l:VerticalLayout class="sapUiContentPadding">
-                    <Label text="Product Name"/>
-                    <Input value="{ItemDetails>ItemName}" valueLiveUpdate="true" width="400px"/>
+            <FlexBox height="100%"  id="c4" alignItems="Center" justifyContent="Center">
+                <l:VerticalLayout class="sapUiContentPadding" id="c5">
+                    <Label text="Product Name" id="c6"/>
+                    <Input value="{ItemDetails>/ItemName}" valueLiveUpdate="true" width="400px" id="c7"/>
                     
-                    <Label text="Product ID"/>
-                    <Input value="{ItemDetails>ItemCode}" valueLiveUpdate="true" width="400px"/>
+                    <Label text="Product ID" id="c8"/>
+                    <Input value="{ItemDetails>/ItemCode}" valueLiveUpdate="true" width="400px" id="c9"  enabled="false"/>
 
-                    <Label text="Price"/>
-                    <Input value="{ItemDetails>Price}" valueLiveUpdate="true" width="400px"/>
+                    <Label text="Price" id="c10"/>
+                    <Input value="{ItemDetails>/Price}" valueLiveUpdate="true" width="400px" id="c12"/>
 
-                    <Label text="Supplier"/>
-                    <Input value="{ItemDetails>BarCode}" valueLiveUpdate="true" width="400px"/>
+                    <Label text="Supplier" id="c13"/>
+                    <Input value="{ItemDetails>/BarCode}" valueLiveUpdate="true" width="400px" id="c14"/>
 
-                    <Label text="Description"/>
-                    <Input value="{ItemDetails>ForeignName}" valueLiveUpdate="true" width="400px"/>
+                    <Label text="Description" id="c15"/>
+                    <Input value="{ItemDetails>/ForeignName}" valueLiveUpdate="true" width="400px" id="c16"/>
 
-                    <FlexBox alignItems="End" justifyContent="End">
-                        <l:HorizontalLayout class="sapUiContentPadding" width="100%">
-                            <l:content>
-                                <Button text="Cancel" press="onCancel" type="Emphasized"></Button>
-                                <Button text="Save" press="onSubmit" type="Emphasized"></Button>
+                    <FlexBox alignItems="End" justifyContent="End" id="c17">
+                        <l:HorizontalLayout class="sapUiContentPadding" id="c18">
+                            <l:content  >
+                                <Button text="Cancel" press=".onCancel" type="Emphasized" id="c122"></Button>
+                                <Button text="Save" press=".onSubmit" type="Emphasized" id="c145"></Button>
                             </l:content>
                         </l:HorizontalLayout>
                     </FlexBox>

@@ -34,7 +34,7 @@
 					<m:ToggleButton
 						text="Edit"
 						type="Emphasized"
-						press=".onEddit"/>	
+						press=".onAdd"/>	
 					<m:Button
 						text="Delete"
 						type="Transparent"

@@ -1,10 +1,9 @@
 sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "sap/ui/core/mvc/Controller",
-    "sap/m/MessageBox",
     'sap/m/MessageToast',
     'sap/f/library'
-], function (JSONModel, Controller, fioriLibrary, MessageBox, MessageToast) {
+], function (JSONModel, Controller, fioriLibrary, MessageToast) {
     "use strict";
 
     return Controller.extend("project1.controller.Detail", {
@@ -29,29 +28,10 @@ sap.ui.define([
                 path: "/value/" + this._product,
                 model: "products"
             });
-            console.log(this.getView().bindElement({
-                path: "/value/" + this._product,
-                model: "products"
-            }))
         },
         onAdd: function (oEvent) {
-            var oProductsModel = new JSONModel();
-
-            var oModel = this.getView().getModel("products");
-            var data = oModel.oData.value[this._product];
-
-            var requestData = {
-                "ItemCode": data.ItemCode,
-                "ItemName": data.ItemName,
-                "BarCode": data.BarCode,
-                "ForeignName": data.ForeignName,
-                "Price": data.ItemPrices[0].Price
-            }
-            console.log(requestData)
-
-            this.getView().setModel(requestData, "ItemDetails");
-
-            this.oRouter.navTo("create");
+            console.log(this.oRouter.navTo("edit", { id: this._product }))
+            this.oRouter.navTo("edit", { id: this._product });
         },
         onInitialFocusOnAction: function () {
             MessageBox.warning(
@@ -66,6 +46,7 @@ sap.ui.define([
                 }
             );
         },
+
         onDelete: function (oEvent) {
             var oModel = this.getView().getModel("products");
             var id = oModel.oData.value[this._product].ItemCode;
@@ -76,7 +57,7 @@ sap.ui.define([
                 var password = "Nixon@123";
 
                 var credentials = btoa(username + ":" + password);
-
+                sap.ui.core.BusyIndicator.show()
                 fetch(apiUrl, {
                     method: "DELETE", // Use DELETE method for a DELETE request
                     headers: {
@@ -87,19 +68,44 @@ sap.ui.define([
                         if (!response.ok) {
                             throw new Error("Network response was not ok");
                         }
-                        return response.json(); // If you expect a response, otherwise, you can remove this line
+                        return;
                     })
-                    .then(function (data) {
-                        // Handle the response data or success here
-                        console.log(data); // Log the response data if needed
-                        MessageToast.show("Item Deleted");
+                    .then(function () {
+                        sap.ui.core.BusyIndicator.hide();
                     })
                     .catch(function (error) {
+                        sap.ui.core.BusyIndicator.hide()
                         console.error("Error:", error);
-                        MessageToast.show("Failed to delete item");
                     });
+                this.dataFetch();
             }
+        },
+        dataFetch: function () {
+            var apiUrl = "http://44.193.177.66:50001/b1s/v1/Items";
+            var username = `{"UserName": "manager", "CompanyDB": "AC_Demo"}`;
+            var password = "Nixon@123";
 
+            // Encode credentials in base64
+            var credentials = btoa(username + ":" + password);
+            fetch(apiUrl, {
+                method: "GET",
+                headers: {
+                    "Authorization": "Basic " + credentials,
+                    "Content-Type": "application/json"
+                }
+            })
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.json();
+                })
+                .then(function (data) {
+                    this.getView().getModel("products").setData(data);
+                }.bind(this)) // Bind the "this" context to access the view
+                .catch(function (error) {
+                    console.error("Error:", error);
+                });
         },
         onEditToggleButtonPress: function () {
             var oObjectPage = this.getView().byId("ObjectPageLayout"),
@@ -107,7 +113,6 @@ sap.ui.define([
 
             oObjectPage.setShowFooter(!bCurrentShowFooterState);
         },
-
         onExit: function () {
             this.oRouter.getRoute("list").detachPatternMatched(this._onProductMatched, this);
             this.oRouter.getRoute("detail").detachPatternMatched(this._onProductMatched, this);
