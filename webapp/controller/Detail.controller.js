@@ -30,7 +30,6 @@ sap.ui.define([
             });
         },
         onAdd: function (oEvent) {
-            console.log(this.oRouter.navTo("edit", { id: this._product }))
             this.oRouter.navTo("edit", { id: this._product });
         },
         onInitialFocusOnAction: function () {
@@ -72,40 +71,40 @@ sap.ui.define([
                     })
                     .then(function () {
                         sap.ui.core.BusyIndicator.hide();
+                        MessageToast.show("Item Deleted")
                     })
                     .catch(function (error) {
                         sap.ui.core.BusyIndicator.hide()
                         console.error("Error:", error);
                     });
-                this.dataFetch();
-            }
-        },
-        dataFetch: function () {
-            var apiUrl = "http://44.193.177.66:50001/b1s/v1/Items";
-            var username = `{"UserName": "manager", "CompanyDB": "AC_Demo"}`;
-            var password = "Nixon@123";
+                var apiUrl = "http://44.193.177.66:50001/b1s/v1/Items";
+                var username = `{"UserName": "manager", "CompanyDB": "AC_Demo"}`;
+                var password = "Nixon@123";
 
-            // Encode credentials in base64
-            var credentials = btoa(username + ":" + password);
-            fetch(apiUrl, {
-                method: "GET",
-                headers: {
-                    "Authorization": "Basic " + credentials,
-                    "Content-Type": "application/json"
-                }
-            })
-                .then(function (response) {
-                    if (!response.ok) {
-                        throw new Error("Network response was not ok");
+                // Encode credentials in base64
+                var credentials = btoa(username + ":" + password);
+                fetch(apiUrl, {
+                    method: "GET",
+                    headers: {
+                        "Authorization": "Basic " + credentials,
+                        "Content-Type": "application/json"
                     }
-                    return response.json();
                 })
-                .then(function (data) {
-                    this.getView().getModel("products").setData(data);
-                }.bind(this)) // Bind the "this" context to access the view
-                .catch(function (error) {
-                    console.error("Error:", error);
-                });
+                    .then(function (response) {
+                        if (!response.ok) {
+                            throw new Error("Network response was not ok");
+                        }
+                        return response.json();
+                    })
+                    .then(function (data) {
+                        this.getView().getModel("products").setData(data);
+                        MessageToast.show("Item Deleted")
+                    }.bind(this))
+                    .catch(function (error) {
+                        MessageToast.show(error);
+                        console.error("Error:", error);
+                    });
+            }
         },
         onEditToggleButtonPress: function () {
             var oObjectPage = this.getView().byId("ObjectPageLayout"),

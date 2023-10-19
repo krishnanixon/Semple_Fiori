@@ -45,6 +45,7 @@ sap.ui.define(
                     .then(function (data) {
                         this.getView().getModel("products").setData(data);
                         oRouter.navTo("window-1");
+                        console.log(oRouter.navTo("window-1"))
                     }.bind(this)) // Bind the "this" context to access the view
                     .catch(function (error) {
                         MessageToast.show(error);

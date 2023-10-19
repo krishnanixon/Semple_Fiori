@@ -34,34 +34,7 @@ sap.ui.define([
 
         },
         dataFetch: function () {
-            var apiUrl = "http://44.193.177.66:50001/b1s/v1/Items";
-            var username = `{"UserName": "manager", "CompanyDB": "AC_Demo"}`;
-            var password = "Nixon@123";
 
-
-            // Encode credentials in base64
-            var credentials = btoa(username + ":" + password);
-            fetch(apiUrl, {
-                method: "GET",
-                headers: {
-                    "Authorization": "Basic " + credentials,
-                    "Content-Type": "application/json"
-                }
-            })
-                .then(function (response) {
-                    if (!response.ok) {
-                        throw new Error("Network response was not ok");
-                    }
-                    return response.json();
-                })
-                .then(function (data) {
-                    this.getView().getModel("products").setData(data);
-                    oRouter.navTo("window-1");
-                }.bind(this)) // Bind the "this" context to access the view
-                .catch(function (error) {
-                    MessageToast.show(error);
-                    console.error("Error:", error);
-                });
         },
         onSubmit: function () {
             var data = this.getView().getModel("ItemDetails");
@@ -110,7 +83,32 @@ sap.ui.define([
                         console.error("Error:", error);
                     });
             }
+            var apiUrl = "http://44.193.177.66:50001/b1s/v1/Items";
+            var username = `{"UserName": "manager", "CompanyDB": "AC_Demo"}`;
+            var password = "Nixon@123";
 
+            // Encode credentials in base64
+            var credentials = btoa(username + ":" + password);
+            fetch(apiUrl, {
+                method: "GET",
+                headers: {
+                    "Authorization": "Basic " + credentials,
+                    "Content-Type": "application/json"
+                }
+            })
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.json();
+                })
+                .then(function (data) {
+                    this.getView().getModel("products").setData(data);
+                }.bind(this))
+                .catch(function (error) {
+                    MessageToast.show(error);
+                    console.error("Error:", error);
+                });
         }
     });
 });
