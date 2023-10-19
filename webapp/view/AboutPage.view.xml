@@ -1,45 +1,44 @@
 <mvc:View
-	xmlns:l="sap.ui.layout"
+    controllerName="project1.controller.AddItem"
+    xmlns:l="sap.ui.layout"
     xmlns:form="sap.ui.layout.form"
-     xmlns:main="sap.ui.webc.main"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns="sap.m">
-		<Panel width="auto" height="100%" class="sapUiResponsiveMargin" accessibleRole="Region">
-		    <headerToolbar>
-			    <OverflowToolbar> <Title text="Add Items"/> </OverflowToolbar>
-		    </headerToolbar>
-		<content>
+    xmlns:main="sap.ui.webc.main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Panel width="auto" height="100%" accessibleRole="Region">
+        <headerToolbar>
+            <OverflowToolbar>
+                <Title text="Add Item"/>
+            </OverflowToolbar>
+        </headerToolbar>
+        <content>
             <FlexBox height="100%" alignItems="Center" justifyContent="Center">
-
-			<l:VerticalLayout class="sapUiContentPadding">
-
-			        <Label text="Product Name"/>
-			        <Input value="{/productName}" valueLiveUpdate="true" width="400px" enabled="{/enabled}"/>
+                <l:VerticalLayout class="sapUiContentPadding">
+                    <Label text="Product Name"/>
+                    <Input value="{addItem>/productName}" valueLiveUpdate="true" width="400px"/>
                     
-			        <Label text="Product ID"/>
-			        <Input value="{/Product ID}" valueLiveUpdate="true" width="400px" enabled="{/enabled}"/>
+                    <Label text="Product ID"/>
+                    <Input value="{addItem>/productID}" valueLiveUpdate="true" width="400px"/>
 
                     <Label text="Price"/>
-			        <Input value="{/Price}"  valueLiveUpdate="true" width="400px" enabled="{/enabled}"/>
+                    <Input value="{addItem>/price}" valueLiveUpdate="true" width="400px"/>
 
                     <Label text="Supplier"/>
-			        <Input value="{/Supplier}"  valueLiveUpdate="true" width="400px" enabled="{/enabled}"/>
+                    <Input value="{addItem>/supplier}" valueLiveUpdate="true" width="400px"/>
 
                     <Label text="Description"/>
-			        <Input value="{/Description}"  valueLiveUpdate="true" width="400px" enabled="{/enabled}"/>
+                    <Input value="{addItem>/description}" valueLiveUpdate="true" width="400px"/>
 
-                   	<FlexBox
-				alignItems="End"
-				justifyContent="End">
-                        <l:HorizontalLayout class="sapUiContentPadding"  width="100%">
-                        <l:content>
-                            <Button text="Cancel" click="handleClick" design="Negative"></Button>
-                            <Button text="Save" click="handleClick" design="Emphasized"></Button> </l:content>
+                    <FlexBox alignItems="End" justifyContent="End">
+                        <l:HorizontalLayout class="sapUiContentPadding" width="100%">
+                            <l:content>
+                                <Button text="Cancel" press="onCancel" type="Emphasized"></Button>
+                                <Button text="Save" press="onSubmit" type="Emphasized"></Button>
+                            </l:content>
                         </l:HorizontalLayout>
                     </FlexBox>
-	            </l:VerticalLayout>
+                </l:VerticalLayout>
             </FlexBox>
-		</content>
-	</Panel>
-
+        </content>
+    </Panel>
 </mvc:View>

@@ -16,13 +16,9 @@ sap.ui.define([
         },
 
         _onPatternMatch: function (oEvent) {
-            this._supplier = oEvent.getParameter("arguments").supplier || this._supplier || "0";
-            this._product = oEvent.getParameter("arguments").product || this._product || "0";
 
-            this.getView().bindElement({
-                path: "/ProductCollectionStats/Filters/1/values/" + this._supplier,
-                model: "products"
-            });
+            console.log(this._product)
+
         },
         handleAboutPress: function () {
             this.oRouter.navTo("page2", { layout: fioriLibrary.LayoutType.EndColumnFullScreen });

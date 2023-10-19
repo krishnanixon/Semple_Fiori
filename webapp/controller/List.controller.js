@@ -23,20 +23,20 @@ sap.ui.define([
                 sQuery = oEvent.getParameter("query");
 
             if (sQuery && sQuery.length > 0) {
-                oTableSearchState = [new Filter("Name", FilterOperator.Contains, sQuery)];
+                oTableSearchState = [new Filter("ItemName", FilterOperator.Contains, sQuery)];
             }
 
             this.oProductsTable.getBinding("items").filter(oTableSearchState, "Application");
         },
 
-        onAdd: function () {
-            this.oRouter.navTo("page2", { layout: fioriLibrary.LayoutType.EndColumnFullScreen });
+        onAdd: function (oEvent) {
+            this.oRouter.navTo("add", { layout: fioriLibrary.LayoutType.EndColumnFullScreen });
         },
 
         onSort: function () {
             this._bDescendingSort = !this._bDescendingSort;
             var oBinding = this.oProductsTable.getBinding("items"),
-                oSorter = new Sorter("Name", this._bDescendingSort);
+                oSorter = new Sorter("ItemName", this._bDescendingSort);
             oBinding.sort(oSorter);
         },
         onListItemPress: function (oEvent) {
