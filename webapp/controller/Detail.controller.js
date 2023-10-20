@@ -71,7 +71,7 @@ sap.ui.define([
                     })
                     .then(function () {
                         sap.ui.core.BusyIndicator.hide();
-                        MessageToast.show("Item Deleted")
+                        MessageToast.show("Item Added");
                     })
                     .catch(function (error) {
                         sap.ui.core.BusyIndicator.hide()
@@ -104,6 +104,7 @@ sap.ui.define([
                         MessageToast.show(error);
                         console.error("Error:", error);
                     });
+                this.oRouter.navTo("list");
             }
         },
         onEditToggleButtonPress: function () {

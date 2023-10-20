@@ -147,11 +147,11 @@
           "controlAggregation": "endColumnPages"
         },
         "add": {
-          "name": "AboutPage",
+          "name": "AddItem",
           "controlAggregation": "endColumnPages"
         },
         "edit": {
-          "name": "Create",
+          "name": "Edit",
           "controlAggregation": "endColumnPages"
         }
       }

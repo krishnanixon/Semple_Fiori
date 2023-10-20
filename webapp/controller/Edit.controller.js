@@ -4,19 +4,15 @@ sap.ui.define([
     'sap/m/MessageToast'
 ], function (JSONModel, Controller, MessageToast) {
     "use strict";
-
-    return Controller.extend("project1.controller.Create", {
+    return Controller.extend("project1.controller.Edit", {
         onInit: function () {
-            var oRouter = this.getOwnerComponent().getRouter();
-            oRouter.getRoute("edit").attachPatternMatched(this._onProductMatched, this);
+            this.oRouter = this.getOwnerComponent().getRouter();
+            this.oRouter.getRoute("edit").attachPatternMatched(this._onProductMatched, this);
         },
-
         _onProductMatched: function (oEvent) {
-
-            var productId = oEvent.getParameter("arguments").id || "0";
             var oProductsModel = new JSONModel();
+            var productId = oEvent.getParameter("arguments").id || "0";
             var oModel = this.getView().getModel("products");
-
             if (oModel) {
                 var data = oModel.oData.value[productId];
                 var requestData = {
@@ -31,10 +27,7 @@ sap.ui.define([
             }
         },
         onCancel: function () {
-
-        },
-        dataFetch: function () {
-
+            this.oRouter.navTo("list");
         },
         onSubmit: function () {
             var data = this.getView().getModel("ItemDetails");
@@ -75,8 +68,6 @@ sap.ui.define([
                     .then(function () {
                         sap.ui.core.BusyIndicator.hide();
                         MessageToast.show("Item Updated");
-                        this.dataFetch()
-                        // Handle the response data (if applicable)
                     })
                     .catch(function (error) {
                         sap.ui.core.BusyIndicator.hide();
@@ -109,6 +100,7 @@ sap.ui.define([
                     MessageToast.show(error);
                     console.error("Error:", error);
                 });
+            this.oRouter.navTo("list");
         }
     });
 });

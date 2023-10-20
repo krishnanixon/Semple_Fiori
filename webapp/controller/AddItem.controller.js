@@ -2,15 +2,15 @@ sap.ui.define(
     [
         "sap/ui/core/mvc/Controller",
         "sap/ui/model/json/JSONModel",
-        'sap/m/MessageToast'
+        "sap/ui/core/routing/History",
+        'sap/m/MessageToast',
+        'sap/f/library'
     ],
-    function (Controller, JSONModel, MessageToast) {
+    function (Controller, JSONModel, MessageToast, History, fioriLibrary) {
         "use strict";
 
         return Controller.extend("project1.controller.AddItem", {
-
             onInit: function () {
-
                 var oModel = new JSONModel({
                     productName: "",
                     productID: "",
@@ -19,14 +19,12 @@ sap.ui.define(
                     description: ""
                 });
                 this.getView().setModel(oModel, "addItem");
+                this.oRouter = this.getOwnerComponent().getRouter();
             },
             dataFetch: function () {
                 var apiUrl = "http://44.193.177.66:50001/b1s/v1/Items";
                 var username = `{"UserName": "manager", "CompanyDB": "AC_Demo"}`;
                 var password = "Nixon@123";
-                var oRouter = this.getOwnerComponent().getRouter();
-
-
                 // Encode credentials in base64
                 var credentials = btoa(username + ":" + password);
                 fetch(apiUrl, {
@@ -44,14 +42,23 @@ sap.ui.define(
                     })
                     .then(function (data) {
                         this.getView().getModel("products").setData(data);
-                        oRouter.navTo("window-1");
-                        console.log(oRouter.navTo("window-1"))
                     }.bind(this)) // Bind the "this" context to access the view
                     .catch(function (error) {
                         MessageToast.show(error);
                         console.error("Error:", error);
                     });
             },
+            onNavBack: function () {
+                this.getView().getModel("addItem").setData({
+                    productName: "",
+                    productID: "",
+                    price: "",
+                    supplier: "",
+                    description: ""
+                });
+                this.oRouter.navTo("list");
+            }
+            ,
             onSubmit: function () {
                 var data = this.getView().getModel("addItem").getData();
                 var requestData = {
@@ -85,13 +92,10 @@ sap.ui.define(
                         if (!response.ok) {
                             throw new Error("Network response was not ok");
                         }
-                        return response.json();
+                        return;
                     })
-                    .then((data) => { // Use an arrow function to access the controller context
-
+                    .then(() => { // Use an arrow function to access the controller context
                         sap.ui.core.BusyIndicator.hide()
-
-                        MessageToast.show("Items Added");
                         this.getView().getModel("addItem").setData({
                             productName: "",
                             productID: "",
@@ -99,8 +103,9 @@ sap.ui.define(
                             supplier: "",
                             description: ""
                         });
+                        this.oRouter.navTo("list");
+                        MessageToast.show("Item Added")
                         this.dataFetch()
-
                     })
                     .catch(function (error) {
                         sap.ui.core.BusyIndicator.hide()
@@ -109,7 +114,6 @@ sap.ui.define(
                     });
             },
             onCancel: function () {
-                console.log("I am Here")
                 this.getView().getModel("addItem").setData({
                     productName: "",
                     productID: "",

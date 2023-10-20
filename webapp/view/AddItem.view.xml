@@ -1,0 +1,44 @@
+<mvc:View
+    controllerName="project1.controller.AddItem"
+    xmlns:l="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:main="sap.ui.webc.main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Panel width="auto" height="100%" accessibleRole="Region" id="a1">
+        <headerToolbar>
+            <OverflowToolbar id="a2">
+                <Title text="Add Item" id="a3"/>
+            </OverflowToolbar>
+        </headerToolbar>
+        <content>
+            <FlexBox height="100%" alignItems="Center" id="a4" justifyContent="Center">
+                <l:VerticalLayout class="sapUiContentPadding" id="a5">
+                    <Label text="Product Name" id="a6"/>
+                    <Input value="{addItem>/productName}" valueLiveUpdate="true" width="300px" id="a7"/>
+                    
+                    <Label text="Product ID" id="a8"/>
+                    <Input value="{addItem>/productID}" id="a9" valueLiveUpdate="true" width="300px"/>
+
+                    <Label text="Price" id="a10"/>
+                    <Input value="{addItem>/price}" valueLiveUpdate="true" width="300px" id="a11"/>
+
+                    <Label text="Supplier" id="a13"/>
+                    <Input value="{addItem>/supplier}" valueLiveUpdate="true" width="300px" id="a14"/>
+
+                    <Label text="Description" id="a15"/>
+                    <Input value="{addItem>/description}" valueLiveUpdate="true" width="300px" id="1a"/>
+
+                    <FlexBox alignItems="End" justifyContent="End" id="aflex">
+                        <l:HorizontalLayout class="sapUiContentPadding"  id="ahg">
+                            <l:content>
+                                <Button text="Cancel" press="onNavBack" type="Emphasized" id="ab1"></Button>
+                                <Button text="Save" press="onSubmit" type="Emphasized" id="ab2"></Button>
+                            </l:content>
+                        </l:HorizontalLayout>
+                    </FlexBox>
+                </l:VerticalLayout>
+            </FlexBox>
+        </content>
+    </Panel>
+</mvc:View>
